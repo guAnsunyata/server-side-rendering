@@ -1,21 +1,13 @@
 {
-    "name": "spatie/server-side-rendering",
+    "name": "guansunyata/server-side-rendering",
     "description": "Server side rendering JavaScript in your PHP application",
     "keywords": [
         "spatie",
         "ssr",
         "server-side-rendering"
     ],
-    "homepage": "https://github.com/spatie/server-side-rendering",
+    "homepage": "https://github.com/guansunyata/server-side-rendering",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Sebastian De Deyne",
-            "email": "sebastian@spatie.be",
-            "homepage": "https://spatie.be",
-            "role": "Developer"
-        }
-    ],
     "require": {
         "php": "^7.0",
         "symfony/process": "^3.0|^4.0"
