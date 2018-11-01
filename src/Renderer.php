@@ -188,7 +188,7 @@ class Renderer
         }, $this->env, array_keys($this->env));
 
         return implode(';', [
-            'var process = process || { env: {} }',
+            // 'var process = process || { env: {} }',
             implode(';', $envAssignments),
             "var context = {$context}",
         ]);
