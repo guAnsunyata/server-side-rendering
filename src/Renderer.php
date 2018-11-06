@@ -77,9 +77,10 @@ class Renderer
      *
      * @return $this
      */
-    public function entry(string $entry)
+    public function entry(string $entry, bool $is_mix)
     {
         $this->entry = $entry;
+        $this->is_mix = $is_mix;
 
         return $this;
     }
@@ -206,7 +207,7 @@ JS;
     protected function applicationScript(): string
     {
         $entry = $this->entryResolver
-            ? call_user_func($this->entryResolver, $this->entry)
+            ? call_user_func($this->entryResolver, $this->entry, $this->is_mix)
             : $this->entry;
 
         if (! file_exists($entry)) {
