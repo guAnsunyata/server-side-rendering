@@ -31,6 +31,8 @@ class Renderer
     /** @var callable|null */
     protected $entryResolver;
 
+    protected $ssrErrorSignature;
+
     public function __construct(Engine $engine)
     {
         $this->engine = $engine;
@@ -147,6 +149,13 @@ class Renderer
         return $this;
     }
 
+    public function ssrErrorSignature(string $ssrErrorSignature)
+    {
+        $this->ssrErrorSignature = $ssrErrorSignature;
+
+        return $this;
+    }
+
     public function render()
     {
         if (! $this->enabled) {
@@ -156,6 +165,7 @@ class Renderer
         try {
             $serverScript = implode(';', [
                 $this->dispatchScript(),
+                $this->dispatchErrorScript(),
                 $this->environmentScript(),
                 $this->applicationScript(),
             ]);
@@ -200,6 +210,16 @@ class Renderer
         return <<<JS
 var dispatch = function (result) {
     return {$this->engine->getDispatchHandler()}(JSON.stringify(result))
+}
+JS;
+    }
+
+    protected function dispatchErrorScript(): string
+    {
+        return <<<JS
+var dispatchError = function (err) {
+    console.log('{$this->ssrErrorSignature}')
+    console.log(err)
 }
 JS;
     }
