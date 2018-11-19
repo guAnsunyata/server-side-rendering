@@ -41,7 +41,7 @@ class Node implements Engine
                 throw RenderError::message($result);
             }
 
-            return substr($process->mustRun()->getOutput(), 0, -1);
+            return $result;
 
         } catch (ProcessFailedException $exception) {
             throw EngineError::withException($exception);
